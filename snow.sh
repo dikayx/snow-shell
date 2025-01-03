@@ -39,7 +39,7 @@ print_character() {
 
 # Function to draw the Christmas tree
 draw_christmas_tree() {
-    local tree_base_row=$((ROWS - 10))
+    local tree_base_row=$((ROWS - 11)) # Moved tree up by one row
     local tree_base_col=$((COLUMNS / 2))
     local tree_height=8
 
@@ -87,6 +87,11 @@ snowfall() {
         # Draw the Christmas tree
         draw_christmas_tree
 
+        # Draw the bottom layer of snow
+        for col in $(seq 0 $((COLUMNS - 1))); do
+            print_character $((ROWS - 1)) $col "*" "white"
+        done
+
         # Randomly add new snowflakes
         col=$((RANDOM % (COLUMNS - 1) + 1))
 
@@ -102,7 +107,7 @@ snowfall() {
             print_character $row $key " " $COLOR  # Erase the old snowflake
 
             # Move snowflake down if it's not at the bottom
-            if (( row < ROWS - 1 )); then
+            if (( row < ROWS - 2 )); then
                 snowflakes[$key]=$((row + 1))
                 print_character $((row + 1)) $key $PARTICLE $COLOR
             else
@@ -119,6 +124,5 @@ snowfall() {
 # Run snowfall
 snowfall
 
-# TODO: Add a bottom layer of snow on the ground
 # TODO: Make the snowflakes fall slower than the tree ornaments blink
 # TODO: Hide snowflakes if they are behind the tree
