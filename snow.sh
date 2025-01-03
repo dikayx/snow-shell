@@ -123,6 +123,3 @@ snowfall() {
 
 # Run snowfall
 snowfall
-
-# TODO: Make the snowflakes fall slower than the tree ornaments blink
-# TODO: Hide snowflakes if they are behind the tree
